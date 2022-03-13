@@ -137,12 +137,12 @@ class ElasticsearchBackend:
             }
         }
 
-        # If a 'filter' clause already exist, add the range query on top,
+        # If a 'filter' clause already exist, add the range query,
         # otherwise create the 'filter' clause.
         if "filter" in body["query"]["bool"]:
-            body["query"]["bool"]["filter"]["range"] = range_query
+            body["query"]["bool"]["filter"] += [{"range": range_query}]
         else:
-            body["query"]["bool"] = {"filter": {"range": range_query}}
+            body["query"]["bool"]["filter"] = [{"range": range_query}]
 
         return body
 
