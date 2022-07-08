@@ -144,6 +144,7 @@ class ElasticsearchBackend:
         else:
             body["query"]["bool"]["filter"] = [{"range": range_query}]
 
+        LOGGER.debug(body)
         return body
 
 
